@@ -1,23 +1,23 @@
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+sudo: false
 language: python
 python:
+- 3.6
 - 3.7
 install:
-- pip install -r requirements-dev.txt
-- pip install .
-- pip install -e git+https://github.com/napalm-automation/napalm-base.git@develop#egg=napalm-base
+- pip install tox-travis
 - pip install coveralls
-
 deploy:
   provider: pypi
-  user: dbarroso
+  user: skoef
   password:
-    secure: IIifRr9K771snku+qI7yz8T/cJC4ZO/fUYUNILhMB5eQtF2/MAEU7W1owGfcIqE9SW7fhPAXqVrnb7AcdFyjjbkZn6uoYYlh5LrQaCXgbfol5Yg+OSsRKFwhEOBcKFrtqz3W6UPunN6CX4v2gn2UCmWSyQ3XERgqKxobBVSOMb1G9PTy/Zk0ZUvGJc05bxWj3xuVQKg904VpnhQJ6q1h4d9SV+dQClP4eDRbEwe+ICKX3S2JPa/PiJfWrIsCL12yT+iZ/aiDwfSBjh+o3HMdt98cB3FkHAibEZnvpLOpUCmjX1rMyqyJEqVgDM1mQ4vyoYO5DNFv94ZufGJnJP+TIbkkSaFy9ZpeC2V+7K03TM+g1rZD3BKK50u3kL86KsHao14SZHV58l7/b3023IUr4MwrQgoLlHMhw9IFFC8bYmP/6aylae5fR/+5inGloSByzWLAKKQ0FLPPkCoeukmldyphjZ8HnGdhEu566kO9R5gxJ4edsbeimsRAO3oZ/EByQcgOytJjVKjMpn7fhiSblJO8KB4+M5d5fXUn5RZ31P3g8RFfG1Jqx2l9eOd4i8u9l3NkRd9WO8q5wyF/hvC/u4RcIMnRYl5hPWMBNY6uGGj7aq7o+XETTLVFirCwHBKre6OLdaVpW1ZciJP07Xb9qhyPLCeP3E9VM/OAz9rs5KI=
-  on:
+    secure: ANp4vrfn/SIxc5vDUaxqnIE8mdfZloLcf2Hvc+8xdnIbKFrRO9i9m2LqIlBSoqfbvuRy5HcH0m7lup6BlU31Y37dcsbzjdjW8C9lAWzYETH73ZMPMnhlkkdeP4QsxcAgpvffvdg9cMPE8WxOO6wf+6oNq0Lu2kK+PiZ5QeLbuIHP0xz8Itk7CZe2on9mJxp4axMXihBaHWgRdNFY5ajxF6hESrp7qSs5FOhZFgwB1a04OME68TsiS0LirfDC0sPOr/stj9/o2aajUwgx/dytw0iDaN/MIMBvcxLbu+mXTJ2oh8L7p+LM0precwqIhSbuKjveMgPUUmst8yOqbJwBpdZo+C1zxlG6YPfKP+K1CQu8dzCUWoEWtlk2qPmijS/MPsiC6yzE6RUxLHepkpn4ppfh8e9HUHMJA011v8jN9VHlp4k57s4sEqKiIfkFIEktGs+sAZO4BAjC/nDSckHUpTbcWDrS1AAnsuJnFcTQCTGA8EV2S8GcSvNquNl54yZGcplvkn+MAHEtUBxmnsshSU2gmhLUxiT9w9giEih/0FS9aruyl9K7aWCw3H+tYBrHNh+n/MZ95BGo3BytEY6qSnQlrhoRSGxy0slLUa2nYP6kLItFsRpewrqz37Fhcf/FiweFVe2O2JGAfSPkiAWWpeMT3n+deOVKO+tjr7m+WAE=
     tags: true
     branch: master
-
 script:
-- py.test --cov-report= test/
-
+- tox
 after_success:
 - coveralls
